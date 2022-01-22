@@ -11,6 +11,7 @@ public class Client_ {
 		System.out.println(s.getAge());
 		System.out.println("try end");
 //		} catch (Exception e) {
+		throw new RuntimeException();
 //			System.err.println("Ab to pakra gya!!");
 //			System.err.println(e.getMessage());
 //			e.printStackTrace();
