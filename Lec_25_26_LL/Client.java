@@ -41,5 +41,15 @@ public class Client {
 		LL.K_Rev(3);
 		LL.disp();
 		
+		System.out.println("===========");
+		System.out.println("===========");
+		System.out.println("===========");
+
+		LL = new LinkedList(true);
+		System.out.println(LL.hasCycle());
+//		System.out.println(LL.CycleLen());
+		LL.CycleRem();
+		System.out.println(LL.hasCycle());
+		LL.disp();
 	}
 }

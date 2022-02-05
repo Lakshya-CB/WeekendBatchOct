@@ -3,7 +3,7 @@ package Lec_25_26_LL;
 import java.util.Stack;
 
 public class LinkedList {
-	 class Node {
+	class Node {
 		int data;
 		Node next;
 
@@ -28,6 +28,28 @@ public class LinkedList {
 		nn1.next = nn2;
 		nn2.next = nn3;
 		nn3.next = nn4;
+
+		head = nn1;
+	}
+
+	public LinkedList(boolean cycle) {
+		// TODO Auto-generated constructor stub
+		Node nn1 = new Node(10);
+		Node nn2 = new Node(20);
+		Node nn3 = new Node(30);
+		Node nn4 = new Node(40);
+		Node nn5 = new Node(50);
+		Node nn6 = new Node(60);
+		Node nn7 = new Node(70);
+
+		nn1.next = nn2;
+		nn2.next = nn3;
+		nn3.next = nn4;
+		nn4.next = nn5;
+		nn5.next = nn6;
+		nn6.next = nn7;
+
+		nn7.next = nn4;
 
 		head = nn1;
 	}
@@ -293,13 +315,62 @@ public class LinkedList {
 	public boolean hasCycle() {
 		Node fast = head;
 		Node slow = head;
-		while (fast != slow) {
+		while (true) {
 			if (fast == null || fast.next == null) {
 				return false;
 			}
 			fast = fast.next.next;
 			slow = slow.next;
+
+//			System.out.println(fast.data + " - " + slow.data);
+			if (slow == fast) {
+				return true;
+			}
 		}
-		return true;
+	}
+
+	public int CycleLen() {
+		if (hasCycle()) {
+			Node fast = head;
+			Node slow = head;
+			while (true) {
+				fast = fast.next.next;
+				slow = slow.next;
+				if (slow == fast) {
+					break;
+				}
+			}
+			int size = 1;
+			while (slow.next != fast) {
+				size++;
+				slow = slow.next;
+			}
+			return size;
+
+		} else {
+			return 0;
+		}
+	}
+
+	public void CycleRem() {
+		if (hasCycle()) {
+			Node fast = head;
+			Node slow = head;
+			while (true) {
+				fast = fast.next.next;
+				slow = slow.next;
+				if (slow == fast) {
+					break;
+				}
+			}
+			Node fresh = head;
+
+			while (slow.next != fresh.next) {
+
+				slow = slow.next;
+				fresh = fresh.next;
+			}
+			slow.next = null;
+		}
 	}
 }
