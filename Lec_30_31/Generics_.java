@@ -46,6 +46,13 @@ public class Generics_ {
 		System.out.println();
 	}
 
+	public static  void disp(Object[] arr) {
+		for (Object i : arr) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+	}
+	
 	public static <UUU> void disp(UUU[] arr) {
 		for (UUU i : arr) {
 			System.out.print(i + " ");
