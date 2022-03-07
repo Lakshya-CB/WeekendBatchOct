@@ -57,18 +57,18 @@ public class Coin_change {
 	}
 
 	public static int BU(int Amount, int[] coins) {
-		int dp[][] = new int[Amount + 1][coins.length+1];
+		int dp[][] = new int[Amount + 1][coins.length + 1];
 
-		for (int A = 0; A <= Amount; A++) {
-			for (int idx = coins.length - 1; idx >= 0; idx--) {
+		for (int idx = coins.length - 1; idx >= 0; idx--) {
+			for (int A = 0; A <= Amount; A++) {
 //				create the solution of dp[A][idx]
 				if (A == 0) {
 					dp[A][idx] = 1;
 					continue;
 				}
-				
+
 				int sp1 = 0;
-				if(A - coins[idx]>=0) {
+				if (A - coins[idx] >= 0) {
 					sp1 = dp[A - coins[idx]][idx];
 				}
 				int sp2 = dp[A][idx + 1];
@@ -77,5 +77,31 @@ public class Coin_change {
 			}
 		}
 		return dp[Amount][0];
+	}
+	public static int BUSE(int Amount, int[] coins) {
+//		int dp[][] = new int[Amount + 1][coins.length + 1];
+		int dp_c[] = new int[Amount + 1];
+		int dp_p[] = new int[Amount + 1];
+
+		for (int idx = coins.length - 1; idx >= 0; idx--) {
+			dp_c = new int[Amount + 1];
+			for (int A = 0; A <= Amount; A++) {
+//				create the solution of dp[A][idx]
+				if (A == 0) {
+					dp_c[A] = 1;
+					continue;
+				}
+
+				int sp1 = 0;
+				if (A - coins[idx] >= 0) {
+					sp1 = dp_c[A - coins[idx]];
+				}
+				int sp2 = dp_p[A];
+
+				dp_c[A] = sp1 + sp2;
+			}
+			dp_p = dp_c;
+		}
+		return dp_c[Amount];
 	}
 }
